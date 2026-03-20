@@ -1,0 +1,346 @@
+import React, { useMemo, useState } from "react"; import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; import { Button } from "@/components/ui/button"; import { Input } from "@/components/ui/input"; import { Label } from "@/components/ui/label"; import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"; import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"; import { Textarea } from "@/components/ui/textarea"; import { Badge } from "@/components/ui/badge"; import { Calculator, ClipboardList, FileText, TrendingUp, Plus, Trash2, Home } from "lucide-react";
+
+const services = [ { key: "rebedRepoint", name: "Rebed + Repoint", unit: "LM", rate: 45 }, { key: "repoint", name: "Repoint Only", unit: "LM", rate: 25 }, { key: "wash", name: "Pressure Wash", unit: "m²", rate: 5 }, { key: "paint", name: "Roof Paint", unit: "m²", rate: 17 }, { key: "valleyConcrete", name: "Valley Replacement (Concrete)", unit: "LM", rate: 210 }, { key: "valleyTerracotta", name: "Valley Replacement (Terracotta)", unit: "LM", rate: 260 }, { key: "tileChange", name: "Tile Change", unit: "unit", rate: 5 }, { key: "handrailInstall", name: "Hand Rail Install", unit: "LM", rate: 6 }, { key: "handrailRemove", name: "Hand Rail Remove", unit: "LM", rate: 6 }, { key: "hourly", name: "Hourly", unit: "hr", rate: 55 }, { key: "sealCoat", name: "Seal Coat Upsell", unit: "m²", rate: 8 }, { key: "repairs", name: "Extra Repairs Upsell", unit: "unit", rate: 150 }, ];
+
+const makeEmptyLine = () => ({ serviceKey: "rebedRepoint", qty: "", materialMode: "supply", difficulty: "0", });
+
+function money(value) { return new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD", maximumFractionDigits: 2, }).format(Number(value || 0)); }
+
+export default function ElevateRoofingApp() { const [client, setClient] = useState({ name: "", phone: "", address: "", scope: "Roof restoration and associated works", });
+
+const [targetDailyRate, setTargetDailyRate] = useState(1200); const [estimatedDays, setEstimatedDays] = useState(3); const [minCharge, setMinCharge] = useState(1500); const [gstEnabled, setGstEnabled] = useState(true);
+
+const [lines, setLines] = useState([ { serviceKey: "rebedRepoint", qty: "", materialMode: "labour", difficulty: "0" }, { serviceKey: "wash", qty: "", materialMode: "labour", difficulty: "0" }, { serviceKey: "paint", qty: "", materialMode: "labour", difficulty: "0" }, { serviceKey: "valleyConcrete", qty: "", materialMode: "labour", difficulty: "0" }, ]);
+
+const [jobs, setJobs] = useState([ { name: "Example Roof Restoration", quoted: 5400, won: true, days: 4 }, { name: "Example Valley Replacement", quoted: 2650, won: false, days: 2 }, ]);
+
+const computedLines = useMemo(() => { return lines.map((line) => { const service = services.find((s) => s.key === line.serviceKey) || services[0]; const qty = Number(line.qty || 0); const baseRate = service.rate; const materialFactor = line.materialMode === "labour" ? 0.8 : 1; const difficultyFactor = 1 + Number(line.difficulty || 0) / 100; const adjustedRate = baseRate * materialFactor * difficultyFactor; const total = qty * adjustedRate; return { ...line, service, qty, baseRate, adjustedRate, total }; }); }, [lines]);
+
+const subtotal = useMemo(() => computedLines.reduce((sum, line) => sum + line.total, 0), [computedLines]); const minimumApplied = Math.max(subtotal, Number(minCharge || 0)); const gst = gstEnabled ? minimumApplied * 0.1 : 0; const grandTotal = minimumApplied + gst; const targetJobValue = Number(targetDailyRate || 0) * Number(estimatedDays || 0); const profitGap = grandTotal - targetJobValue; const quotePerDay = estimatedDays ? grandTotal / estimatedDays : 0;
+
+const trackerStats = useMemo(() => { const totalQuoted = jobs.reduce((sum, job) => sum + Number(job.quoted || 0), 0); const wonJobs = jobs.filter((j) => j.won); const wonValue = wonJobs.reduce((sum, job) => sum + Number(job.quoted || 0), 0); const totalDays = wonJobs.reduce((sum, job) => sum + Number(job.days || 0), 0); const closeRate = jobs.length ? (wonJobs.length / jobs.length) * 100 : 0; const avgWonValue = wonJobs.length ? wonValue / wonJobs.length : 0; const avgPerDay = totalDays ? wonValue / totalDays : 0; return { totalQuoted, wonValue, closeRate, avgWonValue, avgPerDay }; }, [jobs]);
+
+const addLine = () => setLines((prev) => [...prev, makeEmptyLine()]); const removeLine = (index) => setLines((prev) => prev.filter((_, i) => i !== index)); const updateLine = (index, field, value) => { setLines((prev) => prev.map((line, i) => (i === index ? { ...line, [field]: value } : line))); };
+
+const addJob = () => { setJobs((prev) => [...prev, { name: "", quoted: 0, won: false, days: 1 }]); };
+
+const updateJob = (index, field, value) => { setJobs((prev) => prev.map((job, i) => (i === index ? { ...job, [field]: value } : job))); };
+
+const removeJob = (index) => setJobs((prev) => prev.filter((_, i) => i !== index));
+
+const invoiceText = Quote for ${client.name || "Client"}\nAddress: ${client.address || "-"}\nPhone: ${client.phone || "-"}\n\nScope of Works:\n${client.scope}\n\nSubtotal: ${money(subtotal)}\nMinimum Charge Applied: ${money(minimumApplied)}\nGST: ${money(gst)}\nTotal: ${money(grandTotal)}\n\nTerms:\n- No warranty on client supplied materials.\n- Variations charged as required.\n- Payment due upon completion unless otherwise agreed.;
+
+return ( <div className="min-h-screen bg-slate-50 p-4 md:p-8"> <div className="mx-auto max-w-7xl space-y-6"> <div className="rounded-3xl bg-white p-6 shadow-sm border border-slate-200"> <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"> <div> <div className="flex items-center gap-3"> <div className="rounded-2xl bg-slate-900 p-3 text-white"> <Home className="h-6 w-6" /> </div> <div> <h1 className="text-2xl font-bold tracking-tight">Elevate Roof & Home Improvements</h1> <p className="text-sm text-slate-600">Mobile quoting, pricing control, invoicing, and job tracking</p> </div> </div> </div> <div className="grid grid-cols-2 gap-3 md:grid-cols-4"> <Metric label="Quote Total" value={money(grandTotal)} /> <Metric label="Per Day" value={money(quotePerDay)} /> <Metric label="Target" value={money(targetJobValue)} /> <Metric label="Gap" value={money(profitGap)} positive={profitGap >= 0} /> </div> </div> </div>
+
+<Tabs defaultValue="quickquote" className="space-y-6">
+      <TabsList className="grid w-full grid-cols-4 rounded-2xl bg-white p-1 shadow-sm border border-slate-200">
+        <TabsTrigger value="quickquote" className="rounded-xl"><Calculator className="mr-2 h-4 w-4" />Quote</TabsTrigger>
+        <TabsTrigger value="invoice" className="rounded-xl"><FileText className="mr-2 h-4 w-4" />Invoice</TabsTrigger>
+        <TabsTrigger value="tracker" className="rounded-xl"><TrendingUp className="mr-2 h-4 w-4" />Tracker</TabsTrigger>
+        <TabsTrigger value="settings" className="rounded-xl"><ClipboardList className="mr-2 h-4 w-4" />Settings</TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="quickquote">
+        <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
+          <Card className="rounded-3xl border-slate-200 shadow-sm">
+            <CardHeader>
+              <CardTitle>Mobile Quick Quote</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid gap-4 md:grid-cols-2">
+                <Field label="Client Name">
+                  <Input value={client.name} onChange={(e) => setClient({ ...client, name: e.target.value })} placeholder="Client name" />
+                </Field>
+                <Field label="Phone">
+                  <Input value={client.phone} onChange={(e) => setClient({ ...client, phone: e.target.value })} placeholder="Phone number" />
+                </Field>
+                <Field label="Address" className="md:col-span-2">
+                  <Input value={client.address} onChange={(e) => setClient({ ...client, address: e.target.value })} placeholder="Job address" />
+                </Field>
+              </div>
+
+              <div className="space-y-3">
+                {computedLines.map((line, index) => (
+                  <div key={index} className="grid gap-3 rounded-2xl border border-slate-200 p-4 md:grid-cols-12">
+                    <div className="md:col-span-4">
+                      <Label>Service</Label>
+                      <Select value={line.serviceKey} onValueChange={(value) => updateLine(index, "serviceKey", value)}>
+                        <SelectTrigger className="mt-1 rounded-xl"><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                          {services.map((service) => (
+                            <SelectItem key={service.key} value={service.key}>
+                              {service.name} · {money(service.rate)}/{service.unit}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="md:col-span-2">
+                      <Label>Qty</Label>
+                      <Input className="mt-1 rounded-xl" type="number" value={line.qty} onChange={(e) => updateLine(index, "qty", e.target.value)} placeholder={line.service.unit} />
+                    </div>
+                    <div className="md:col-span-2">
+                      <Label>Mode</Label>
+                      <Select value={line.materialMode} onValueChange={(value) => updateLine(index, "materialMode", value)}>
+                        <SelectTrigger className="mt-1 rounded-xl"><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="supply">Supply & Install</SelectItem>
+                          <SelectItem value="labour">Labour Only</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="md:col-span-2">
+                      <Label>Difficulty</Label>
+                      <Select value={line.difficulty} onValueChange={(value) => updateLine(index, "difficulty", value)}>
+                        <SelectTrigger className="mt-1 rounded-xl"><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                          {["0", "10", "20", "30", "40"].map((v) => (
+                            <SelectItem key={v} value={v}>{v}%</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="md:col-span-1">
+                      <Label>Rate</Label>
+                      <div className="mt-3 text-sm font-semibold">{money(line.adjustedRate)}</div>
+                    </div>
+                    <div className="md:col-span-1 flex items-end justify-end">
+                      <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => removeLine(index)}>
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <div className="md:col-span-12 flex items-center justify-between rounded-2xl bg-slate-100 px-4 py-3 text-sm">
+                      <span>{line.service.unit} line total</span>
+                      <span className="font-semibold">{money(line.total)}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <Button onClick={addLine} className="rounded-2xl"><Plus className="mr-2 h-4 w-4" />Add Line</Button>
+            </CardContent>
+          </Card>
+
+          <div className="space-y-6">
+            <Card className="rounded-3xl border-slate-200 shadow-sm">
+              <CardHeader>
+                <CardTitle>Quote Summary</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <SummaryRow label="Subtotal" value={money(subtotal)} />
+                <SummaryRow label="Minimum Applied" value={money(minimumApplied)} />
+                <SummaryRow label="GST" value={money(gst)} />
+                <div className="rounded-2xl bg-slate-900 p-4 text-white">
+                  <div className="text-sm text-slate-300">Total Quote</div>
+                  <div className="text-3xl font-bold">{money(grandTotal)}</div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <SummaryCard label="Target Job Value" value={money(targetJobValue)} />
+                  <SummaryCard label="Value Per Day" value={money(quotePerDay)} />
+                </div>
+                <div className="rounded-2xl border p-4">
+                  <div className="mb-2 text-sm font-medium">Pricing Signal</div>
+                  {profitGap >= 0 ? (
+                    <Badge className="rounded-full">Above target by {money(profitGap)}</Badge>
+                  ) : (
+                    <Badge variant="destructive" className="rounded-full">Below target by {money(Math.abs(profitGap))}</Badge>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="rounded-3xl border-slate-200 shadow-sm">
+              <CardHeader>
+                <CardTitle>Upsell Prompts</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3 text-sm text-slate-700">
+                <div className="rounded-2xl bg-slate-100 p-3">Add ridge repointing if caps show cracking or separation.</div>
+                <div className="rounded-2xl bg-slate-100 p-3">Add seal coat when paint prep is already included.</div>
+                <div className="rounded-2xl bg-slate-100 p-3">Bundle valley replacement with ridge works for stronger job value.</div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </TabsContent>
+
+      <TabsContent value="invoice">
+        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <Card className="rounded-3xl border-slate-200 shadow-sm">
+            <CardHeader>
+              <CardTitle>Invoice / Quote Details</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Field label="Scope of Works">
+                <Textarea value={client.scope} onChange={(e) => setClient({ ...client, scope: e.target.value })} className="min-h-[180px] rounded-2xl" />
+              </Field>
+              <div className="rounded-2xl bg-slate-100 p-4 text-sm text-slate-700">
+                This screen gives you a clean client-facing summary you can copy into a message, email, or PDF workflow.
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="rounded-3xl border-slate-200 shadow-sm">
+            <CardHeader>
+              <CardTitle>Client Preview</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="rounded-3xl border border-slate-200 bg-white p-6">
+                <div className="mb-6 flex items-center justify-between">
+                  <div>
+                    <h2 className="text-xl font-bold">Elevate Roof & Home Improvements</h2>
+                    <p className="text-sm text-slate-600">Roof restoration, re-bedding, repointing, pressure cleaning and valleys</p>
+                  </div>
+                  <Badge className="rounded-full">Quote</Badge>
+                </div>
+                <div className="grid gap-2 text-sm md:grid-cols-2">
+                  <div><span className="font-semibold">Client:</span> {client.name || "—"}</div>
+                  <div><span className="font-semibold">Phone:</span> {client.phone || "—"}</div>
+                  <div className="md:col-span-2"><span className="font-semibold">Address:</span> {client.address || "—"}</div>
+                </div>
+                <div className="my-6 h-px bg-slate-200" />
+                <div>
+                  <div className="mb-2 font-semibold">Scope of Works</div>
+                  <p className="whitespace-pre-wrap text-sm text-slate-700">{client.scope}</p>
+                </div>
+                <div className="my-6 h-px bg-slate-200" />
+                <div className="space-y-2 text-sm">
+                  <SummaryRow label="Subtotal" value={money(subtotal)} />
+                  <SummaryRow label="Minimum Charge Applied" value={money(minimumApplied)} />
+                  <SummaryRow label="GST" value={money(gst)} />
+                </div>
+                <div className="mt-6 rounded-2xl bg-slate-900 p-4 text-white">
+                  <div className="text-sm text-slate-300">Total Due</div>
+                  <div className="text-3xl font-bold">{money(grandTotal)}</div>
+                </div>
+                <div className="mt-6 text-xs leading-6 text-slate-600">
+                  <div>No warranty on client supplied materials.</div>
+                  <div>Variations charged as required.</div>
+                  <div>Payment due upon completion unless otherwise agreed.</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </TabsContent>
+
+      <TabsContent value="tracker">
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <Card className="rounded-3xl border-slate-200 shadow-sm">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle>Job Tracker</CardTitle>
+                <Button onClick={addJob} className="rounded-2xl"><Plus className="mr-2 h-4 w-4" />Add Job</Button>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {jobs.map((job, index) => (
+                <div key={index} className="grid gap-3 rounded-2xl border border-slate-200 p-4 md:grid-cols-12">
+                  <div className="md:col-span-4">
+                    <Label>Job</Label>
+                    <Input className="mt-1 rounded-xl" value={job.name} onChange={(e) => updateJob(index, "name", e.target.value)} />
+                  </div>
+                  <div className="md:col-span-3">
+                    <Label>Quoted</Label>
+                    <Input className="mt-1 rounded-xl" type="number" value={job.quoted} onChange={(e) => updateJob(index, "quoted", e.target.value)} />
+                  </div>
+                  <div className="md:col-span-2">
+                    <Label>Days</Label>
+                    <Input className="mt-1 rounded-xl" type="number" value={job.days} onChange={(e) => updateJob(index, "days", e.target.value)} />
+                  </div>
+                  <div className="md:col-span-2">
+                    <Label>Status</Label>
+                    <Select value={job.won ? "won" : "lost"} onValueChange={(v) => updateJob(index, "won", v === "won")}>
+                      <SelectTrigger className="mt-1 rounded-xl"><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="won">Won</SelectItem>
+                        <SelectItem value="lost">Lost</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="md:col-span-1 flex items-end justify-end">
+                    <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => removeJob(index)}>
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          <Card className="rounded-3xl border-slate-200 shadow-sm">
+            <CardHeader>
+              <CardTitle>Business Metrics</CardTitle>
+            </CardHeader>
+            <CardContent className="grid gap-3 sm:grid-cols-2">
+              <SummaryCard label="Total Quoted" value={money(trackerStats.totalQuoted)} />
+              <SummaryCard label="Won Value" value={money(trackerStats.wonValue)} />
+              <SummaryCard label="Close Rate" value={`${trackerStats.closeRate.toFixed(0)}%`} />
+              <SummaryCard label="Avg Won Job" value={money(trackerStats.avgWonValue)} />
+              <SummaryCard label="Avg Per Day" value={money(trackerStats.avgPerDay)} />
+            </CardContent>
+          </Card>
+        </div>
+      </TabsContent>
+
+      <TabsContent value="settings">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <Card className="rounded-3xl border-slate-200 shadow-sm">
+            <CardHeader>
+              <CardTitle>Business Controls</CardTitle>
+            </CardHeader>
+            <CardContent className="grid gap-4 md:grid-cols-2">
+              <Field label="Target Daily Rate">
+                <Input type="number" value={targetDailyRate} onChange={(e) => setTargetDailyRate(e.target.value)} className="rounded-xl" />
+              </Field>
+              <Field label="Estimated Job Days">
+                <Input type="number" value={estimatedDays} onChange={(e) => setEstimatedDays(e.target.value)} className="rounded-xl" />
+              </Field>
+              <Field label="Minimum Charge">
+                <Input type="number" value={minCharge} onChange={(e) => setMinCharge(e.target.value)} className="rounded-xl" />
+              </Field>
+              <Field label="GST Mode">
+                <Select value={gstEnabled ? "on" : "off"} onValueChange={(v) => setGstEnabled(v === "on")}>
+                  <SelectTrigger className="rounded-xl"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="on">GST On</SelectItem>
+                    <SelectItem value="off">GST Off</SelectItem>
+                  </SelectContent>
+                </Select>
+              </Field>
+            </CardContent>
+          </Card>
+
+          <Card className="rounded-3xl border-slate-200 shadow-sm">
+            <CardHeader>
+              <CardTitle>Automation Ideas to Build Next</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 text-sm text-slate-700">
+              <div className="rounded-2xl bg-slate-100 p-4">Auto-save quotes and jobs to a database so every quote is tracked.</div>
+              <div className="rounded-2xl bg-slate-100 p-4">One-tap PDF export for quotes and invoices.</div>
+              <div className="rounded-2xl bg-slate-100 p-4">Follow-up reminders for unapproved quotes after 2 and 7 days.</div>
+              <div className="rounded-2xl bg-slate-100 p-4">Customer pipeline with stages: New Lead, Quoted, Won, Scheduled, Invoiced, Paid.</div>
+            </CardContent>
+          </Card>
+
+          <Card className="rounded-3xl border-slate-200 shadow-sm lg:col-span-2">
+            <CardHeader>
+              <CardTitle>Copyable Client Text</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Textarea className="min-h-[240px] rounded-2xl" value={invoiceText} readOnly />
+            </CardContent>
+          </Card>
+        </div>
+      </TabsContent>
+    </Tabs>
+  </div>
+</div>
+
+); }
+
+function Metric({ label, value, positive }) { return ( <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"> <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div> <div className={text-lg font-bold ${positive === undefined ? "text-slate-900" : positive ? "text-emerald-600" : "text-rose-600"}}>{value}</div> </div> ); }
+
+function Field({ label, children, className = "" }) { return ( <div className={className}> <Label className="text-sm font-medium">{label}</Label> <div className="mt-1">{children}</div> </div> ); }
+
+function SummaryRow({ label, value }) { return ( <div className="flex items-center justify-between text-sm"> <span className="text-slate-600">{label}</span> <span className="font-semibold text-slate-900">{value}</span> </div> ); }
+
+function SummaryCard({ label, value }) { return ( <div className="rounded-2xl bg-slate-100 p-4"> <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div> <div className="mt-1 text-xl font-bold text-slate-900">{value}</div> </div> ); }
