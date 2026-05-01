@@ -11,7 +11,16 @@ export default function Home() {
 
       <h2>Request a Quote</h2>
 
-      <form action="https://formspree.io/f/YOURFORMID" method="POST" style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "400px" }}>
+    <form
+  action="https://formspree.io/f/xjglvzde"
+  method="POST"
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    maxWidth: "400px"
+  }}
+>
         
         <input name="name" placeholder="Full Name" required style={{ padding: "10px" }} />
         
