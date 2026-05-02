@@ -2,106 +2,165 @@ export default function Home() {
   return (
     <main
       style={{
-        padding: "40px",
-        fontFamily: "Arial",
-        background: "#111",
-        color: "white",
         minHeight: "100vh",
+        background: "#f4f7fb",
+        fontFamily: "Arial, sans-serif",
+        padding: "0",
       }}
     >
-      <h1>Elevate Roof & Home Improvements</h1>
-
-      <p>Premium roofing, restoration and home improvement services.</p>
-
-      <a
-        href="tel:0431170908"
+      <div
         style={{
-          color: "#00bcd4",
-          fontSize: "22px",
-          display: "block",
-          marginBottom: "30px",
+          background: "#155aa0",
+          color: "white",
+          padding: "28px 32px",
         }}
       >
-        Call 0431 170 908
-      </a>
+        <h1 style={{ margin: "0 0 8px 0" }}>
+          Elevate Roof & Home
+        </h1>
+        <p style={{ margin: 0, fontSize: "18px" }}>
+          Business Management
+        </p>
+      </div>
 
-      <h2>Request a Quote</h2>
-
-      <form
-        action="https://formspree.io/f/xjglvzde"
-        method="POST"
+      <section
         style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-          maxWidth: "400px",
+          background: "white",
+          margin: "30px auto",
+          padding: "30px",
+          maxWidth: "650px",
+          borderRadius: "18px",
+          boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
         }}
       >
-        {/* Subject */}
-        <input
-          type="hidden"
-          name="_subject"
-          value="New Quote Request - Elevate Roof & Home Improvements"
-        />
+        <h2>Request a Quote</h2>
 
-        {/* Name */}
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          required
-          style={{ padding: "10px" }}
-        />
-
-        {/* Phone */}
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Phone Number"
-          required
-          style={{ padding: "10px" }}
-        />
-
-        {/* Email (IMPORTANT for Formspree) */}
-        <input
-          type="email"
-          name="_replyto"
-          placeholder="Email Address"
-          required
-          style={{ padding: "10px" }}
-        />
-
-        {/* Address */}
-        <input
-          type="text"
-          name="address"
-          placeholder="Job Address"
-          style={{ padding: "10px" }}
-        />
-
-        {/* Details */}
-        <textarea
-          name="details"
-          placeholder="Describe the job..."
-          required
-          style={{ padding: "10px", minHeight: "120px" }}
-        />
-
-        {/* Submit */}
-        <button
-          type="submit"
+        <form
+          action="https://formspree.io/f/xjglvzde"
+          method="POST"
           style={{
-            padding: "12px",
-            background: "#00bcd4",
-            border: "none",
-            color: "black",
-            fontWeight: "bold",
-            cursor: "pointer",
+            display: "flex",
+            flexDirection: "column",
+            gap: "18px",
           }}
         >
-          Submit Quote Request
-        </button>
-      </form>
+          <input
+            type="hidden"
+            name="_subject"
+            value="New Quote Request - Elevate Roof & Home Improvements"
+          />
+
+          <label>
+            Name
+            <input
+              type="text"
+              name="name"
+              placeholder="Your full name"
+              required
+              style={inputStyle}
+            />
+          </label>
+
+          <label>
+            Phone
+            <input
+              type="tel"
+              name="phone"
+              placeholder="0400 000 000"
+              required
+              style={inputStyle}
+            />
+          </label>
+
+          <label>
+            Email
+            <input
+              type="email"
+              name="_replyto"
+              placeholder="you@email.com"
+              required
+              style={inputStyle}
+            />
+          </label>
+
+          <label>
+            Suburb
+            <input
+              type="text"
+              name="suburb"
+              placeholder="e.g. Pakenham"
+              style={inputStyle}
+            />
+          </label>
+
+          <label>
+            Service Required
+            <select name="service" required style={inputStyle}>
+              <option value="">Select service</option>
+              <option value="Roof Restoration">Roof Restoration</option>
+              <option value="Roof Repairs">Roof Repairs</option>
+              <option value="Roof Cleaning">Roof Cleaning</option>
+              <option value="Re-bedding / Re-pointing">
+                Re-bedding / Re-pointing
+              </option>
+              <option value="Gutters / Fascia">Gutters / Fascia</option>
+              <option value="Home Improvements">Home Improvements</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+
+          <label>
+            Roof Type
+            <select name="roof_type" style={inputStyle}>
+              <option value="">Select roof type</option>
+              <option value="Concrete Tile">Concrete Tile</option>
+              <option value="Terracotta Tile">Terracotta Tile</option>
+              <option value="Metal Roof">Metal Roof</option>
+              <option value="Not Sure">Not Sure</option>
+            </select>
+          </label>
+
+          <label>
+            Job Description
+            <textarea
+              name="details"
+              placeholder="Describe the job..."
+              required
+              style={{
+                ...inputStyle,
+                minHeight: "120px",
+                resize: "vertical",
+              }}
+            />
+          </label>
+
+          <button
+            type="submit"
+            style={{
+              padding: "16px",
+              background: "#155aa0",
+              color: "white",
+              border: "none",
+              borderRadius: "10px",
+              fontSize: "18px",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
+          >
+            Submit Quote Request
+          </button>
+        </form>
+      </section>
     </main>
   );
 }
+
+const inputStyle = {
+  width: "100%",
+  padding: "14px",
+  marginTop: "8px",
+  borderRadius: "10px",
+  border: "1px solid #d5dce5",
+  fontSize: "16px",
+  boxSizing: "border-box",
+};
