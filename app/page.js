@@ -1,13 +1,20 @@
 export default function Home() {
+  const inputStyle = {
+    padding: "10px",
+    fontSize: "16px",
+    borderRadius: "6px",
+    border: "1px solid #ccc",
+  };
+
   return (
     <main
       style={{
         minHeight: "100vh",
         background: "#f4f7fb",
         fontFamily: "Arial, sans-serif",
-        padding: "0",
       }}
     >
+      {/* HEADER */}
       <div
         style={{
           background: "#155aa0",
@@ -23,13 +30,14 @@ export default function Home() {
         </p>
       </div>
 
+      {/* FORM SECTION */}
       <section
         style={{
           background: "white",
           margin: "30px auto",
           padding: "30px",
           maxWidth: "650px",
-          borderRadius: "18px",
+          borderRadius: "10px",
           boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
         }}
       >
@@ -37,19 +45,21 @@ export default function Home() {
 
         <form
           action="https://formspree.io/f/xjglvzde"
-          method="post"
+          method="POST"
           style={{
             display: "flex",
             flexDirection: "column",
             gap: "18px",
           }}
         >
+          {/* SUBJECT */}
           <input
             type="hidden"
             name="_subject"
             value="New Quote Request - Elevate Roof & Home Improvements"
           />
 
+          {/* NAME */}
           <label>
             Name
             <input
@@ -61,6 +71,7 @@ export default function Home() {
             />
           </label>
 
+          {/* PHONE */}
           <label>
             Phone
             <input
@@ -72,17 +83,19 @@ export default function Home() {
             />
           </label>
 
+          {/* EMAIL */}
           <label>
             Email
             <input
               type="email"
-              name="_replyto"
+              name="email"
               placeholder="you@email.com"
               required
               style={inputStyle}
             />
           </label>
 
+          {/* SUBURB */}
           <label>
             Suburb
             <input
@@ -93,74 +106,47 @@ export default function Home() {
             />
           </label>
 
+          {/* SERVICE */}
           <label>
             Service Required
-            <select name="service" required style={inputStyle}>
+            <select name="service" style={inputStyle}>
               <option value="">Select service</option>
-              <option value="Roof Restoration">Roof Restoration</option>
-              <option value="Roof Repairs">Roof Repairs</option>
-              <option value="Roof Cleaning">Roof Cleaning</option>
-              <option value="Re-bedding / Re-pointing">
-                Re-bedding / Re-pointing
-              </option>
-              <option value="Gutters / Fascia">Gutters / Fascia</option>
-              <option value="Home Improvements">Home Improvements</option>
-              <option value="Other">Other</option>
+              <option>Roof Restoration</option>
+              <option>Roof Repairs</option>
+              <option>Re-bedding & Pointing</option>
+              <option>Leak Detection</option>
+              <option>Other</option>
             </select>
           </label>
 
-          <label>
-            Roof Type
-            <select name="roof_type" style={inputStyle}>
-              <option value="">Select roof type</option>
-              <option value="Concrete Tile">Concrete Tile</option>
-              <option value="Terracotta Tile">Terracotta Tile</option>
-              <option value="Metal Roof">Metal Roof</option>
-              <option value="Not Sure">Not Sure</option>
-            </select>
-          </label>
-
+          {/* JOB DESCRIPTION */}
           <label>
             Job Description
             <textarea
-              name="details"
-              placeholder="Describe the job..."
-              required
-              style={{
-                ...inputStyle,
-                minHeight: "120px",
-                resize: "vertical",
-              }}
+              name="message"
+              placeholder="Describe your roofing needs..."
+              rows="4"
+              style={inputStyle}
             />
           </label>
 
+          {/* BUTTON */}
           <button
             type="submit"
             style={{
-              padding: "16px",
               background: "#155aa0",
               color: "white",
+              padding: "14px",
               border: "none",
-              borderRadius: "10px",
-              fontSize: "18px",
-              fontWeight: "bold",
+              borderRadius: "6px",
+              fontSize: "16px",
               cursor: "pointer",
             }}
           >
-            Submit Quote Request
+            Request Quote
           </button>
         </form>
       </section>
     </main>
   );
 }
-
-const inputStyle = {
-  width: "100%",
-  padding: "14px",
-  marginTop: "8px",
-  borderRadius: "10px",
-  border: "1px solid #d5dce5",
-  fontSize: "16px",
-  boxSizing: "border-box",
-};
