@@ -17,7 +17,7 @@ export default function Home() {
       {/* HEADER */}
       <div
         style={{
-          background: "#155aa0",
+          background: "#1e293b",
           color: "white",
           padding: "28px 32px",
         }}
@@ -134,7 +134,7 @@ export default function Home() {
           <button
             type="submit"
             style={{
-              background: "#155aa0",
+              background: "#1e293b",
               color: "white",
               padding: "14px",
               border: "none",
