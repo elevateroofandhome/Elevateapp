@@ -37,12 +37,14 @@ export default function Home() {
           maxWidth: "400px",
         }}
       >
+        {/* Subject */}
         <input
           type="hidden"
           name="_subject"
           value="New Quote Request - Elevate Roof & Home Improvements"
         />
 
+        {/* Name */}
         <input
           type="text"
           name="name"
@@ -51,21 +53,25 @@ export default function Home() {
           style={{ padding: "10px" }}
         />
 
+        {/* Phone */}
         <input
           type="tel"
           name="phone"
-<input
-  type="email"
-  name="_replyto"
-  placeholder="Email Address"
-  required
-  style={{ padding: "10px" }}
-/>
           placeholder="Phone Number"
           required
           style={{ padding: "10px" }}
         />
 
+        {/* Email (IMPORTANT for Formspree) */}
+        <input
+          type="email"
+          name="_replyto"
+          placeholder="Email Address"
+          required
+          style={{ padding: "10px" }}
+        />
+
+        {/* Address */}
         <input
           type="text"
           name="address"
@@ -73,6 +79,7 @@ export default function Home() {
           style={{ padding: "10px" }}
         />
 
+        {/* Details */}
         <textarea
           name="details"
           placeholder="Describe the job..."
@@ -80,6 +87,7 @@ export default function Home() {
           style={{ padding: "10px", minHeight: "120px" }}
         />
 
+        {/* Submit */}
         <button
           type="submit"
           style={{
