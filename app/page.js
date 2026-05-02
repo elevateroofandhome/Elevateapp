@@ -56,7 +56,7 @@ export default function Home() {
           name="phone"
 <input
   type="email"
-  name="email"
+  name="_replyto"
   placeholder="Email Address"
   required
   style={{ padding: "10px" }}
