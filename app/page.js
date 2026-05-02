@@ -54,6 +54,13 @@ export default function Home() {
         <input
           type="tel"
           name="phone"
+<input
+  type="email"
+  name="email"
+  placeholder="Email Address"
+  required
+  style={{ padding: "10px" }}
+/>
           placeholder="Phone Number"
           required
           style={{ padding: "10px" }}
