@@ -37,7 +37,7 @@ export default function Home() {
 
         <form
           action="https://formspree.io/f/xjglvzde"
-          method="POST"
+          method="post"
           style={{
             display: "flex",
             flexDirection: "column",
