@@ -22,7 +22,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
 
         {/* CENTERED LOGO HEADER */}
-        <div className="absolute top-0 left-0 right-0 z-20 flex justify-center bg-black/20 px-6 py-6 backdrop-blur-sm">
+        <div className="absolute top-0 left-0 right-0 z-20 flex justify-center bg-black/20 px-6 py-2 backdrop-blur-sm">
           <img
             src="/logo.png"
             alt="Elevate Roof and Home Improvements Logo"
