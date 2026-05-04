@@ -14,13 +14,20 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent" />
 
         {/* LOGO */}
-        <div className="absolute top-0 left-0 z-20 p-5 md:p-8">
-          <img
-            src="/logo.png"
-            alt="Elevate Roof and Home Improvements Logo"
-            className="w-40 md:w-56 drop-shadow-[0_0_12px_rgba(0,0,0,0.7)]"
-          />
-        </div>
+        <div className="absolute top-0 left-0 right-0 z-20 px-6 md:px-12 py-4 flex items-center justify-between bg-black/30 backdrop-blur-md">
+  <img 
+    src="/logo.png"
+    alt="Elevate Roof and Home Improvements Logo"
+    className="w-36 md:w-44 drop-shadow-[0_0_10px_rgba(0,0,0,0.6)]"
+  />
+
+  <a 
+    href="#quote"
+    className="bg-blue-500 text-white px-4 py-2 rounded-full font-semibold text-sm"
+  >
+    Get Quote
+  </a>
+</div>
 
         {/* HERO CONTENT */}
         <div className="relative z-10 flex min-h-screen items-center px-6 py-32 md:px-12">
