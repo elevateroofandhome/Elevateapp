@@ -9,8 +9,8 @@ export default function Home() {
           className="absolute inset-0 h-full w-full object-cover"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/55 to-[#0b0f14]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-[#0b0f14]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
 
         <div className="relative z-10 flex min-h-screen items-center px-6 py-24">
           <div className="max-w-3xl">
@@ -30,7 +30,7 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-4">
               <a
                 href="#quote"
-                className="rounded-2xl bg-blue-600 px-8 py-4 text-base font-black text-white shadow-xl shadow-blue-950/40"
+                className="rounded-2xl bg-blue-500 px-8 py-4 text-base font-black text-white shadow-xl shadow-blue-950/40 hover:bg-blue-400"
               >
                 Get Free Quote
               </a>
@@ -202,7 +202,7 @@ export default function Home() {
 
             <button
               type="submit"
-              className="rounded-2xl bg-blue-600 p-4 font-black text-white"
+              className="rounded-2xl bg-blue-500 p-4 font-black text-white hover:bg-blue-400"
             >
               Send Request
             </button>
