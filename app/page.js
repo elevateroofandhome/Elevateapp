@@ -16,7 +16,7 @@ export default function Home() {
         {/* LOGO */}
         <div className="absolute top-0 left-0 z-20 p-5 md:p-8">
           <img
-            src="/elevate-logo-transparent.png"
+            src="/logo.png"
             alt="Elevate Roof and Home Improvements Logo"
             className="w-56 md:w-72 drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]"
           />
