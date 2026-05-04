@@ -14,7 +14,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent" />
 
         {/* LOGO */}
-        <div className="absolute top-0 left-0 right-0 z-20 px-6 md:px-12 py-4 flex items-center justify-between bg-black/30 backdrop-blur-md">
+        <div className="absolute top-0 left-0 right-0 z-20 px-6 md:px-12 py-4 flex items-center justify-between gap-4 bg-black/20 backdrop-blur-sm
   <img 
     src="/logo.png"
     alt="Elevate Roof and Home Improvements Logo"
@@ -22,11 +22,11 @@ export default function Home() {
   />
 
   <a 
-    href="#quote"
-    className="bg-blue-500 text-white px-4 py-2 rounded-full font-semibold text-sm"
-  >
-    Get Quote
-  </a>
+  href="#quote"
+  className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-full font-semibold text-sm shadow-md"
+>
+  Get Quote
+</a>
 </div>
 
         {/* HERO CONTENT */}
