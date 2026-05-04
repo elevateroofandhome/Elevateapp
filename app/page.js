@@ -34,11 +34,11 @@ export default function Home() {
         <div className="relative z-10 flex min-h-screen items-center justify-center px-6 pt-44 text-center md:px-12">
           <div className="max-w-4xl">
             <p className="mb-5 text-sm font-black uppercase tracking-[0.28em] text-blue-400 md:text-base">
-               South East Melbourne
+               Melbourne's No.1
             </p>
 
             <h1 className="text-5xl font-black leading-[1.03] tracking-tight md:text-7xl">
-              Premium Roof Restoration, Repairs & Painting
+              Premium Roof Restoration, Repairs & Painting specialist
             </h1>
 
             <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-gray-200 md:text-xl">
