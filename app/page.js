@@ -18,7 +18,7 @@ export default function Home() {
           <img
             src="/elevate-logo-transparent.png"
             alt="Elevate Roof and Home Improvements Logo"
-            className="w-40 md:w-56"
+            className="w-56 md:w-72 drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]"
           />
         </div>
 
@@ -149,7 +149,78 @@ export default function Home() {
           </form>
         </div>
       </section>
+  {/* TRUST BAR */}
+<section className="bg-black py-6 px-6 md:px-12 border-t border-white/10 border-b border-white/10">
+  <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
 
+    <div>
+      <p className="text-2xl font-black text-blue-400">13+</p>
+      <p className="text-sm text-gray-300">Years Experience</p>
+    </div>
+
+    <div>
+      <p className="text-2xl font-black text-blue-400">500+</p>
+      <p className="text-sm text-gray-300">Roofs Completed</p>
+    </div>
+
+    <div>
+      <p className="text-2xl font-black text-blue-400">8 Year</p>
+      <p className="text-sm text-gray-300">Workmanship Warranty</p>
+    </div>
+
+    <div>
+      <p className="text-2xl font-black text-blue-400">100%</p>
+      <p className="text-sm text-gray-300">Customer Focused</p>
+    </div>
+
+  </div>
+</section>
+  {/* BEFORE / AFTER */}
+<section className="px-6 py-20 md:px-12">
+  <div className="max-w-6xl mx-auto">
+
+    <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-400 mb-3">
+      Recent Work
+    </p>
+
+    <h2 className="text-4xl md:text-5xl font-black">
+      Real results. No shortcuts.
+    </h2>
+
+    <div className="mt-10 grid gap-6 md:grid-cols-2">
+
+      {/* JOB 1 */}
+      <div className="grid grid-cols-2 gap-2">
+        <img src="/before1.jpg" className="rounded-xl object-cover h-48 w-full" />
+        <img src="/after1.jpg" className="rounded-xl object-cover h-48 w-full" />
+      </div>
+
+      {/* JOB 2 */}
+      <div className="grid grid-cols-2 gap-2">
+        <img src="/before2.jpg" className="rounded-xl object-cover h-48 w-full" />
+        <img src="/after2.jpg" className="rounded-xl object-cover h-48 w-full" />
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{/* FIXED ACTION BAR */}
+<div className="fixed bottom-0 left-0 right-0 z-50 flex md:hidden">
+  <a
+    href="tel:0431170908"
+    className="w-1/2 bg-black text-white text-center py-4 font-bold border-t border-white/10"
+  >
+    Call Now
+  </a>
+
+  <a
+    href="#quote"
+    className="w-1/2 bg-blue-500 text-white text-center py-4 font-bold"
+  >
+    Get Quote
+  </a>
+</div>
     </main>
   );
 }
