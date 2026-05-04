@@ -1,76 +1,169 @@
 export default function Home() {
   return (
-    <main className="bg-[#101418] text-white">
-      <section className="min-h-screen flex items-center px-5 py-20">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-blue-400 font-bold uppercase mb-3">
-            Pakenham & South East Melbourne
-          </p>
+    <main className="bg-[#0f141a] text-white">
+      {/* HERO */}
+      <section className="relative min-h-screen overflow-hidden">
+        <img
+          src="/roof-hero.jpg"
+          alt="Premium roof restoration by Elevate Roof and Home Improvements"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
 
-          <h1 className="text-5xl font-black mb-6">
-            Premium Roof Restorations, Repairs & Painting
-          </h1>
+        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-[#0f141a]/70 to-[#0f141a]" />
 
-          <p className="text-lg text-gray-300 mb-8 max-w-xl">
-            Professional roofing backed by quality workmanship and real experience.
-            Built to last.
-          </p>
+        <div className="relative z-10 flex min-h-screen items-center px-6 py-20">
+          <div className="max-w-3xl">
+            <p className="mb-4 text-sm font-bold tracking-[0.22em] text-blue-400">
+              PAKENHAM & SOUTH EAST MELBOURNE
+            </p>
 
-          <div className="flex gap-4">
-            <a href="#quote" className="bg-blue-600 px-6 py-3 rounded-lg font-bold">
-              Request Quote
-            </a>
+            <h1 className="text-5xl font-black leading-tight md:text-7xl">
+              Premium Roof Restorations, Repairs & Painting
+            </h1>
 
-            <a href="tel:0431170908" className="border border-white px-6 py-3 rounded-lg font-bold">
-              Call Now
-            </a>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-gray-300">
+              Professional roofing backed by quality workmanship, real experience,
+              and finishes built to last.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <a
+                href="#quote"
+                className="rounded-xl bg-blue-600 px-7 py-4 text-base font-bold text-white shadow-lg shadow-blue-900/30"
+              >
+                Request Quote
+              </a>
+
+              <a
+                href="tel:0431170908"
+                className="rounded-xl border border-white/80 px-7 py-4 text-base font-bold text-white"
+              >
+                Call Now
+              </a>
+            </div>
+
+            <div className="mt-10 grid grid-cols-3 gap-3 text-center text-sm">
+              <div className="rounded-xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+                <strong className="block text-xl">8 Year</strong>
+                Warranty
+              </div>
+
+              <div className="rounded-xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+                <strong className="block text-xl">500+</strong>
+                Roofs Worked On
+              </div>
+
+              <div className="rounded-xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+                <strong className="block text-xl">Local</strong>
+                Family Owned
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 max-w-6xl mx-auto px-5">
-        <h2 className="text-4xl font-black mb-10">Our Services</h2>
+      {/* SERVICES */}
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+          <p className="mb-3 text-sm font-bold tracking-[0.2em] text-blue-400">
+            SERVICES
+          </p>
 
-        <div className="grid md:grid-cols-4 gap-6">
-          {[
-            "Roof Restorations",
-            "Roof Repairs",
-            "Roof Painting",
-            "Pressure Cleaning",
-          ].map((service) => (
-            <div key={service} className="bg-[#151b22] p-6 rounded-xl border border-[#253241]">
-              <div className="w-10 h-10 bg-blue-600 mb-4 rounded"></div>
-              <h3 className="font-bold text-lg">{service}</h3>
-            </div>
-          ))}
+          <h2 className="mb-10 text-4xl font-black">
+            Roofing & Home Improvement Services
+          </h2>
+
+          <div className="grid gap-5 md:grid-cols-4">
+            {[
+              "Roof Restorations",
+              "Roof Repairs",
+              "Roof Painting",
+              "Pressure Cleaning",
+              "Gutter Installations",
+              "Fascia & Cladding",
+              "Roof Reports",
+              "Home Improvements",
+            ].map((service) => (
+              <div
+                key={service}
+                className="rounded-2xl border border-white/10 bg-[#151c24] p-6 shadow-xl"
+              >
+                <div className="mb-4 h-2 w-12 rounded-full bg-blue-500" />
+                <h3 className="text-lg font-bold">{service}</h3>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="quote" className="py-20 max-w-3xl mx-auto px-5">
-        <div className="bg-white text-black p-8 rounded-2xl">
-          <h2 className="text-3xl font-black mb-6">
-            Get a Free Roof Inspection
-          </h2>
+      {/* QUOTE FORM */}
+      <section id="quote" className="px-6 pb-24">
+        <div className="mx-auto max-w-3xl rounded-3xl bg-white p-7 text-black shadow-2xl">
+          <h2 className="mb-2 text-3xl font-black">Request a Quote</h2>
+
+          <p className="mb-6 text-gray-600">
+            Tell us what you need and we’ll get back to you.
+          </p>
 
           <form
             action="https://formspree.io/f/xjglvzde"
             method="POST"
             className="grid gap-4"
           >
-            <input name="name" placeholder="Full Name" required className="border p-3 rounded" />
-            <input name="phone" placeholder="Phone" required className="border p-3 rounded" />
-            <input name="email" placeholder="Email" className="border p-3 rounded" />
-            <input name="suburb" placeholder="Suburb" className="border p-3 rounded" />
+            <input
+              name="name"
+              placeholder="Full Name"
+              required
+              className="rounded-xl border border-gray-300 p-4"
+            />
 
-            <select name="service" className="border p-3 rounded">
-              <option>Select Service</option>
+            <input
+              name="phone"
+              placeholder="Phone"
+              required
+              className="rounded-xl border border-gray-300 p-4"
+            />
+
+            <input
+              name="email"
+              placeholder="Email"
+              className="rounded-xl border border-gray-300 p-4"
+            />
+
+            <input
+              name="suburb"
+              placeholder="Suburb"
+              className="rounded-xl border border-gray-300 p-4"
+            />
+
+            <select
+              name="service"
+              className="rounded-xl border border-gray-300 p-4"
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Select Service
+              </option>
               <option>Roof Restoration</option>
               <option>Roof Repairs</option>
               <option>Roof Painting</option>
               <option>Pressure Cleaning</option>
+              <option>Gutter / Fascia</option>
+              <option>Home Improvements</option>
             </select>
 
-            <button className="bg-blue-600 text-white p-3 rounded font-bold">
+            <textarea
+              name="message"
+              placeholder="Briefly describe the job"
+              rows="4"
+              className="rounded-xl border border-gray-300 p-4"
+            />
+
+            <button
+              type="submit"
+              className="rounded-xl bg-blue-600 p-4 font-bold text-white"
+            >
               Send Request
             </button>
           </form>
