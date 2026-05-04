@@ -191,15 +191,15 @@ export default function Home() {
 
       {/* JOB 1 */}
       <div className="grid grid-cols-2 gap-2">
-        <img src="/before1.jpg" className="rounded-xl object-cover h-48 w-full" />
-        <img src="/after1.jpg" className="rounded-xl object-cover h-48 w-full" />
-      </div>
+  <img src="/before1.jpg" className="rounded-xl object-cover h-48 w-full" />
+  <img src="/after1.jpg" className="rounded-xl object-cover h-48 w-full" />
+</div>
 
       {/* JOB 2 */}
       <div className="grid grid-cols-2 gap-2">
-        <img src="/before2.jpg" className="rounded-xl object-cover h-48 w-full" />
-        <img src="/after2.jpg" className="rounded-xl object-cover h-48 w-full" />
-      </div>
+  <img src="/before2.jpg" className="rounded-xl object-cover h-48 w-full" />
+  <img src="/after2.jpg" className="rounded-xl object-cover h-48 w-full" />
+</div>
 
     </div>
 
