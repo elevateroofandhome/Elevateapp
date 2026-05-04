@@ -26,7 +26,7 @@ export default function Home() {
           <img
             src="/logo.png"
             alt="Elevate Roof and Home Improvements Logo"
-            className="w-48 drop-shadow-[0_0_14px_rgba(0,0,0,0.75)] md:w-64"
+            className="w-96 drop-shadow-[0_0_14px_rgba(0,0,0,0.75)] md:w-[32rem]"
           />
         </div>
 
