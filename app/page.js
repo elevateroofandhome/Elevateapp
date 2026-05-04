@@ -34,7 +34,7 @@ export default function Home() {
         <div className="relative z-10 flex min-h-screen items-center justify-center px-6 pt-44 text-center md:px-12">
           <div className="max-w-4xl">
             <p className="mb-5 text-sm font-black uppercase tracking-[0.28em] text-blue-400 md:text-base">
-              Pakenham & South East Melbourne
+               South East Melbourne
             </p>
 
             <h1 className="text-5xl font-black leading-[1.03] tracking-tight md:text-7xl">
@@ -58,20 +58,16 @@ export default function Home() {
           </p>
 
           <h2 className="max-w-3xl text-4xl font-black md:text-5xl">
-            Roofing and home improvement work done properly.
+            Roofing and home improvement services.
           </h2>
 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {services.map((service) => (
               <div
                 key={service}
-                className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-xl shadow-black/20 backdrop-blur-sm"
+                className="flex min-h-32 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center shadow-xl shadow-black/20 backdrop-blur-sm"
               >
-                <h3 className="text-xl font-bold">{service}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-gray-300">
-                  Professional service, clean presentation and reliable
-                  workmanship from start to finish.
-                </p>
+                <h3 className="text-2xl font-black">{service}</h3>
               </div>
             ))}
           </div>
