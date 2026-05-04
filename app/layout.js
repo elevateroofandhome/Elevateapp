@@ -1,6 +1,8 @@
+import "./globals.css";
+
 export const metadata = {
   title: "Elevate Roof & Home Improvements",
-  description: "Roofing and home improvement services in Victoria",
+  description: "Roof restorations, repairs, painting and pressure cleaning across Pakenham and South East Melbourne.",
 };
 
 export default function RootLayout({ children }) {
