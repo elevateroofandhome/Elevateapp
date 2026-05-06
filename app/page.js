@@ -12,7 +12,11 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-blue-950/30 via-neutral-950 to-neutral-950" />
 
         <div className="relative mx-auto max-w-6xl text-center">
-          <div className="mx-auto mb-6 h-24 w-24 rounded-full border border-blue-400/40 bg-white/10 shadow-2xl shadow-blue-500/20" />
+          <img
+  src="/logo.png"
+  alt="Elevate Roof and Home Improvements"
+  className="mx-auto mb-8 w-56 md:w-72"
+/>
 
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.35em] text-blue-400">
             Elevate Roof & Home Improvements
