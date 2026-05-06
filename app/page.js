@@ -5,32 +5,49 @@ import { useState } from "react";
 export default function Home() {
   const [quoteOpen, setQuoteOpen] = useState(false);
 
+  const services = [
+    "Roof Restorations",
+    "Roof Repairs",
+    "Roof Painting",
+    "Re-Bedding & Re-Pointing",
+    "Emergency Leak Repairs",
+    "Gutter & Fascia Cleaning",
+    "Valley Replacements",
+    "Pressure Washing",
+    "Comprehensive Roof Reports",
+  ];
+
   return (
-    <main className="min-h-screen bg-neutral-950 text-white">
+    <main className="min-h-screen bg-neutral-950 pb-20 text-white md:pb-0">
       {/* HERO */}
-      <section className="relative overflow-hidden px-6 pb-28 pt-10 md:px-12">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-950/30 via-neutral-950 to-neutral-950" />
+      <section className="relative min-h-screen overflow-hidden px-6 py-10 md:px-12">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-35"
+          style={{ backgroundImage: "url('/hero.jpg')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-neutral-950/75 to-neutral-950" />
 
-        <div className="relative mx-auto max-w-6xl text-center">
+        <div className="relative z-10 mx-auto flex min-h-[90vh] max-w-6xl flex-col items-center justify-center text-center">
           <img
-  src="/logo.png"
-  alt="Elevate Roof and Home Improvements"
-  className="mx-auto mb-8 w-56 md:w-72"
-/>
+            src="/logo.png"
+            alt="Elevate Roof and Home Improvements"
+            className="mx-auto mb-8 w-[26rem] max-w-full md:w-[42rem]"
+          />
 
-          <p className="mb-3 text-sm font-bold uppercase tracking-[0.35em] text-blue-400">
-            Elevate Roof & Home Improvements
+          <p className="mb-4 text-sm font-black uppercase tracking-[0.35em] text-blue-400">
+            Local • Reliable • Professional
           </p>
 
-          <h1 className="mx-auto max-w-4xl text-4xl font-black leading-tight md:text-7xl">
+          <h1 className="mx-auto max-w-5xl text-4xl font-black leading-tight md:text-7xl">
             Premium Roof Restorations, Repairs & Home Improvements Across Victoria
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-300">
-            Family owned. 13+ years experience. Reliable workmanship. Professional roof inspections, repairs, restorations, repainting, re-bedding, re-pointing and emergency leak support.
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-neutral-300 md:text-xl">
+            Family owned and operated with 13+ years experience. Professional roof inspections,
+            roof repairs, restorations, repainting, re-bedding, re-pointing and emergency leak support.
           </p>
 
-          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+          <div className="mt-8 flex w-full flex-col justify-center gap-4 sm:w-auto sm:flex-row">
             <button
               onClick={() => setQuoteOpen(true)}
               className="rounded-full bg-blue-500 px-8 py-4 text-lg font-black text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-600"
@@ -40,26 +57,23 @@ export default function Home() {
 
             <a
               href="tel:0431170908"
-              className="rounded-full border border-white/20 px-8 py-4 text-lg font-black text-white transition hover:bg-white/10"
+              className="rounded-full border border-white/25 bg-white/10 px-8 py-4 text-lg font-black text-white backdrop-blur transition hover:bg-white/20"
             >
               Call 0431 170 908
             </a>
           </div>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-4">
-            {[
-              "13+ Years Experience",
-              "500+ Roofs Worked On",
-              "8 Year Warranty",
-              "Local Family Business",
-            ].map((item) => (
-              <div
-                key={item}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm font-bold text-neutral-200"
-              >
-                {item}
-              </div>
-            ))}
+          <div className="mt-10 grid w-full gap-4 md:grid-cols-4">
+            {["13+ Years Experience", "500+ Roofs Worked On", "8 Year Warranty", "Local Family Business"].map(
+              (item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-white/10 bg-white/10 p-5 text-sm font-black text-white backdrop-blur"
+                >
+                  {item}
+                </div>
+              )
+            )}
           </div>
         </div>
       </section>
@@ -67,31 +81,26 @@ export default function Home() {
       {/* SERVICES */}
       <section className="px-6 py-16 md:px-12">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-3xl font-black md:text-5xl">Roofing Services</h2>
-          <p className="mt-4 max-w-2xl text-neutral-300">
-            Built to help customers quickly understand what you do and enquire with confidence.
+          <p className="text-sm font-black uppercase tracking-[0.3em] text-blue-400">
+            What We Do
           </p>
+          <h2 className="mt-3 text-3xl font-black md:text-5xl">
+            Roofing Services Built Around Trust
+          </h2>
 
           <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {[
-              "Roof Restorations",
-              "Roof Repairs",
-              "Roof Painting",
-              "Re-Bedding & Re-Pointing",
-              "Emergency Leak Repairs",
-              "Gutter & Fascia Cleaning",
-              "Valley Replacements",
-              "Pressure Washing",
-              "Comprehensive Roof Reports",
-            ].map((service) => (
+            {services.map((service) => (
               <div
                 key={service}
-                className="rounded-3xl border border-white/10 bg-neutral-900 p-6 shadow-xl"
+                className="rounded-3xl border border-white/10 bg-neutral-900 p-6 shadow-xl transition hover:-translate-y-1 hover:border-blue-400/40"
               >
-                <h3 className="text-xl font-black text-white">{service}</h3>
+                <h3 className="text-xl font-black">{service}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-neutral-400">
+                  Professional assessment, clear advice and quality workmanship from start to finish.
+                </p>
                 <button
                   onClick={() => setQuoteOpen(true)}
-                  className="mt-5 text-sm font-bold text-blue-400 hover:text-blue-300"
+                  className="mt-5 text-sm font-black text-blue-400 hover:text-blue-300"
                 >
                   Request Quote →
                 </button>
@@ -103,21 +112,26 @@ export default function Home() {
 
       {/* EMERGENCY */}
       <section className="px-6 py-16 md:px-12">
-        <div className="mx-auto max-w-6xl rounded-[2rem] border border-red-500/20 bg-red-950/20 p-8 md:p-12">
-          <h2 className="text-3xl font-black md:text-5xl">
+        <div className="mx-auto max-w-6xl rounded-[2rem] border border-red-500/30 bg-red-950/25 p-8 md:p-12">
+          <p className="text-sm font-black uppercase tracking-[0.3em] text-red-400">
+            Urgent Help
+          </p>
+          <h2 className="mt-3 text-3xl font-black md:text-5xl">
             Roof Leaking Right Now?
           </h2>
-          <p className="mt-4 max-w-2xl text-neutral-300">
-            Emergency roof leaks can quickly cause ceiling, insulation and internal damage. Call now for urgent support.
+          <p className="mt-4 max-w-3xl text-neutral-300">
+            Emergency leaks can quickly cause internal damage. Call now or send through your details
+            and photos so we can assess the issue quickly.
           </p>
 
-          <div className="mt-6 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-7 flex flex-col gap-4 sm:flex-row">
             <a
               href="tel:0431170908"
               className="rounded-full bg-red-600 px-8 py-4 text-center text-lg font-black text-white hover:bg-red-700"
             >
               Emergency Call
             </a>
+
             <button
               onClick={() => setQuoteOpen(true)}
               className="rounded-full border border-white/20 px-8 py-4 text-lg font-black text-white hover:bg-white/10"
@@ -131,67 +145,72 @@ export default function Home() {
       {/* TRUST */}
       <section className="px-6 py-16 md:px-12">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-3xl font-black md:text-5xl">
-            Why Customers Choose Elevate
+          <p className="text-sm font-black uppercase tracking-[0.3em] text-blue-400">
+            Why Choose Elevate
+          </p>
+          <h2 className="mt-3 text-3xl font-black md:text-5xl">
+            A Premium Experience From Quote To Completion
           </h2>
 
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {[
               {
                 title: "Detailed Roof Reports",
-                text: "Clear inspection notes, urgent issues, minor defects, causes and recommended solutions.",
+                text: "Clear inspection notes, urgent issues, minor defects, likely causes and recommended solutions.",
               },
               {
-                title: "Premium Finish",
-                text: "Professional preparation, quality products and clean presentation from quote to completion.",
+                title: "Clean Professional Finish",
+                text: "Quality preparation, premium presentation and a strong focus on long-lasting workmanship.",
               },
               {
-                title: "Clear Communication",
-                text: "Simple quotes, honest advice and a reliable point of contact from start to finish.",
+                title: "Straight Communication",
+                text: "Clear quotes, honest advice and reliable contact throughout the job.",
               },
             ].map((card) => (
-              <div
-                key={card.title}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6"
-              >
+              <div key={card.title} className="rounded-3xl border border-white/10 bg-white/5 p-6">
                 <h3 className="text-xl font-black">{card.title}</h3>
-                <p className="mt-3 text-neutral-300">{card.text}</p>
+                <p className="mt-3 leading-relaxed text-neutral-300">{card.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* GALLERY PLACEHOLDER */}
+      {/* GALLERY */}
       <section className="px-6 py-16 md:px-12">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-3xl font-black md:text-5xl">
+          <p className="text-sm font-black uppercase tracking-[0.3em] text-blue-400">
+            Our Work
+          </p>
+          <h2 className="mt-3 text-3xl font-black md:text-5xl">
             Recent Roof Transformations
           </h2>
 
           <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {[1, 2, 3].map((item) => (
+            {["Before & After", "Roof Restoration", "Roof Repairs"].map((item) => (
               <div
                 key={item}
                 className="flex h-64 items-end rounded-3xl border border-white/10 bg-gradient-to-br from-neutral-800 to-neutral-950 p-6"
               >
-                <p className="font-bold text-neutral-300">
-                  Add real before/after job photo here
-                </p>
+                <p className="font-black text-neutral-300">{item} Photo</p>
               </div>
             ))}
           </div>
+
+          <p className="mt-4 text-sm text-neutral-500">
+            Replace these placeholders with real job photos when ready.
+          </p>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* FINAL CTA */}
       <section className="px-6 py-20 md:px-12">
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="mx-auto max-w-4xl rounded-[2rem] border border-blue-500/20 bg-blue-950/20 p-8 text-center md:p-12">
           <h2 className="text-4xl font-black md:text-6xl">
             Want Your Roof Assessed Properly?
           </h2>
-          <p className="mt-5 text-neutral-300">
-            Send through your details and photos. We’ll review the job and contact you with the next step.
+          <p className="mx-auto mt-5 max-w-2xl text-neutral-300">
+            Send your details and photos through. We’ll review the job and contact you with the next step.
           </p>
 
           <button
@@ -205,9 +224,15 @@ export default function Home() {
 
       {/* FOOTER */}
       <footer className="border-t border-white/10 px-6 py-10 text-center text-sm text-neutral-400">
-        <p className="font-bold text-white">Elevate Roof & Home Improvements</p>
+        <p className="font-black text-white">Elevate Roof & Home Improvements</p>
         <p className="mt-2">Pakenham, Victoria • 0431 170 908</p>
         <p className="mt-2">ABN: 55 343 607 931</p>
+        <a
+          href="mailto:elevateroofandhome@gmail.com"
+          className="mt-3 inline-block text-blue-400 hover:text-blue-300"
+        >
+          elevateroofandhome@gmail.com
+        </a>
       </footer>
 
       {/* MOBILE STICKY CTA */}
@@ -236,7 +261,7 @@ export default function Home() {
 
       {/* QUOTE FORM POPUP */}
       {quoteOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 px-4">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 px-4">
           <div className="max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-3xl border border-white/10 bg-neutral-950 p-6 shadow-2xl">
             <div className="mb-5 flex items-start justify-between gap-4">
               <div>
@@ -247,6 +272,7 @@ export default function Home() {
               </div>
 
               <button
+                type="button"
                 onClick={() => setQuoteOpen(false)}
                 className="rounded-full bg-white/10 px-4 py-2 font-black hover:bg-white/20"
               >
@@ -257,6 +283,7 @@ export default function Home() {
             <form
               action="https://formspree.io/f/xjglvzde"
               method="POST"
+              encType="multipart/form-data"
               className="grid gap-4"
             >
               <input
@@ -309,7 +336,16 @@ export default function Home() {
                 className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-white outline-none focus:border-blue-400"
               />
 
-              <input type="hidden" name="_subject" value="New Website Quote Request - Elevate" />
+              <label className="rounded-2xl border border-dashed border-white/20 bg-white/5 px-4 py-4 text-sm text-neutral-400">
+                Upload photos if needed
+                <input name="attachment" type="file" className="mt-3 block w-full text-sm" />
+              </label>
+
+              <input
+                type="hidden"
+                name="_subject"
+                value="New Website Quote Request - Elevate"
+              />
 
               <button
                 type="submit"
