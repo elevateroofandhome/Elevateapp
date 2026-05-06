@@ -98,8 +98,15 @@ export default function Home() {
             >
               Call 0431 170 908
             </a>
-
-            <a
+<a
+  href="https://formspree.io/f/xjglvzde"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="bg-blue-500 px-5 py-5 text-center text-lg font-black text-white"
+>
+  Get Quote
+</a>
+            
               href="mailto:elevateroofandhome@gmail.com"
               className="rounded-full border border-white/20 px-7 py-4 text-center font-bold text-white transition hover:bg-white/10"
             >
@@ -118,12 +125,7 @@ export default function Home() {
           Call Now
         </a>
 
-        <a
-          href="#quote"
-          className="bg-blue-500 px-5 py-5 text-center text-lg font-black text-white"
-        >
-          Get Quote
-        </a>
+       
       </div>
     </main>
   );
